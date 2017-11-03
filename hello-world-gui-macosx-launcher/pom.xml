@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.devzendo</groupId>
+        <artifactId>cross-platform-launcher-plugin-example</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../</relativePath>
+    </parent>
+
+    <groupId>org.devzendo</groupId>
+    <artifactId>hello-world-gui-macosx-launcher</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+
+    <properties>
+        <appName>XPLP-Example</appName>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.devzendo</groupId>
+            <artifactId>hello-world-gui-macosx</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.devzendo</groupId>
+            <artifactId>quaqua</artifactId>
+            <version>9.1</version>
+        </dependency>
+    </dependencies>
+
+    <profiles>
+        <profile>
+            <id>mac os x</id>
+            <activation>
+                <os>
+                    <name>mac os x</name>
+                </os>
+            </activation>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.devzendo</groupId>
+                        <artifactId>cross-platform-launcher-plugin</artifactId>
+                        <version>1.1.1</version>
+                        <configuration>
+                            <os>MacOSX</os>
+                            <applicationName>${appName}</applicationName>
+                            <mainClassName>org.devzendo.xplpexample.Main</mainClassName>
+                            <!-- Icon from http://www.iconarchive.com/tag/mac-file -->
+                            <iconsFileName>Ncrow-Mega-Pack-1-Yz-Shadow-Mac.icns</iconsFileName>
+                            <stubType>Universal</stubType>
+                            <!--
+                              I don't have an assigned creator code
+                              <bundleSignature>BM</bundleSignature>
+                            -->
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>createlauncher</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>createlauncher</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <!--
+                      Copy the Quaqua native libraries into the correct location in the
+                      Mac OS X launcher structure created above.
+                    -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>unpack-quaqua-dependencies</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>unpack</goal>
+                                </goals>
+                                <configuration>
+                                    <artifactItems>
+                                        <!-- Quaqua is depended on in the macosx project -->
+                                        <artifactItem>
+                                            <groupId>org.devzendo</groupId>
+                                            <artifactId>libquaqua</artifactId>
+                                            <version>9.1</version>
+                                            <type>zip</type>
+                                            <overWrite>true</overWrite>
+                                            <includes>*</includes>
+                                            <outputDirectory>
+                                                ${project.build.directory}/macosx/${appName}.app/Contents/Resources/Java/lib
+                                            </outputDirectory>
+                                        </artifactItem>
+                                    </artifactItems>
+                                    <!-- other configurations here -->
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+</project>

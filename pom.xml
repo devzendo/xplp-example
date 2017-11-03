@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.devzendo</groupId>
+    <artifactId>cross-platform-launcher-plugin-example</artifactId>
+    <name>cross-platform-launcher-plugin-example</name>
+    <description>Demo of the Cross-Platform Laucher Plugin. Hello World in GUI and console forms. OSX, Windows and Linux.</description>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <parent>
+        <groupId>org.devzendo</groupId>
+        <artifactId>group-parent</artifactId>
+        <version>1.1.1</version>
+    </parent>
+
+    <modules>
+        <module>hello-world-console</module>
+
+        <module>hello-world-gui</module>
+
+        <module>hello-world-gui-macosx</module> <!-- OSX has some platform-specific code to make GUIs much prettier, using Quaqua & Apple Menus -->
+
+        <module>hello-world-gui-macosx-launcher</module>
+        <!--
+        <module>hello-world-console-macosx-launcher</module>
+
+        <module>hello-world-console-linux-launcher</module>
+        <module>hello-world-gui-linux-launcher</module>
+
+        <module>hello-world-console-windows-launcher</module>
+        <module>hello-world-gui-windows-launcher</module>
+         -->
+    </modules>
+</project>
