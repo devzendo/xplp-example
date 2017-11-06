@@ -22,7 +22,6 @@
         <module>hello-world-gui-macosx</module> <!-- OSX has some platform-specific code to make GUIs much prettier, using Quaqua & Apple Menus -->
 
         <module>hello-world-gui-macosx-launcher</module>
-        <!--
         <module>hello-world-console-macosx-launcher</module>
 
         <module>hello-world-console-linux-launcher</module>
@@ -30,6 +29,5 @@
 
         <module>hello-world-console-windows-launcher</module>
         <module>hello-world-gui-windows-launcher</module>
-         -->
     </modules>
 </project>

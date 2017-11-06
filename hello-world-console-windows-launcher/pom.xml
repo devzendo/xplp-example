@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.devzendo</groupId>
+        <artifactId>cross-platform-launcher-plugin-example</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <groupId>org.devzendo</groupId>
+    <artifactId>hello-world-console-windows-launcher</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+
+    <properties>
+        <appName>XPLP-Example</appName>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.devzendo</groupId>
+            <artifactId>hello-world-console</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+
+    <profiles>
+        <profile>
+            <id>windows</id>
+            <activation>
+                <os>
+                    <name>Windows</name>
+                </os>
+            </activation>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.devzendo</groupId>
+                        <artifactId>cross-platform-launcher-plugin</artifactId>
+                        <version>1.1.1</version>
+                        <configuration>
+                            <os>Windows</os>
+                            <launcherType>Console</launcherType>
+                            <applicationName>${appName}</applicationName>
+                            <mainClassName>org.devzendo.xplpexample.Main</mainClassName>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>createlauncher</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>createlauncher</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>
